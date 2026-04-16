@@ -1,40 +1,27 @@
-# 🛒 E-Commerce Data Analysis (SQL Project)
+# 🛒 E-Commerce Data Analysis (SQL)
 
-## 📌 Objective
-The goal of this project is to analyze an e-commerce dataset using SQL to extract meaningful business insights and support data-driven decision-making.
+## 📌 Overview
+This project analyzes an e-commerce dataset using SQL to extract insights on sales trends, customer behavior, and product performance.
 
----
-
-## 🛠️ Tools & Technologies
+## 🛠️ Tools Used
 - SQL (MySQL)
-- Relational Database
-- Data Analysis Techniques
 
----
+## 📂 Dataset
+🔗 https://drive.google.com/drive/folders/1BytTEaYFInLDU1hw0uWsvNqDIATYvz5r?usp=sharing 
+*Dataset hosted externally due to size limitations.*
 
-## 📊 Dataset
-The dataset contains information about:
-- Orders
-- Customers
-- Products
-- Sales and revenue
+## 🔍 Key Analysis
+- JOINs to combine multiple tables  
+- Aggregations (SUM, COUNT, AVG)  
+- GROUP BY and filtering for insights  
 
----
+## 📈 Insights
+- Identified top-selling products  
+- Analyzed customer purchasing patterns  
+- Evaluated sales performance across categories  
 
-## 🔍 Key Analysis Performed
-- Used SQL queries with **JOINs** to combine multiple tables
-- Applied **GROUP BY** and **aggregation functions** to analyze sales data
-- Used **subqueries** to extract deeper insights
-- Filtered and sorted data to identify trends
-
----
-
-## 📈 Key Insights
-- Identified **top-selling products** contributing to revenue
-- Analyzed **customer purchasing behavior**
-- Discovered **sales trends across different categories**
-- Highlighted high-performing and low-performing segments
-
----
-
-## 📂 Project Structure
+## ▶️ How to Run
+1. Download dataset from the link  
+2. Import into MySQL
+3. change the file location in "LOAD DATA INPATH YOUR-PATH/DATASET"
+4. Run queries from `analysis.sql`
