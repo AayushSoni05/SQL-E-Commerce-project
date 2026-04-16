@@ -24,58 +24,37 @@ product_weight int, product_length int, product_height int, prodcut_width int);
 load data local infile 'olist_products_dataset.csv'
 into table products fields terminated by ',' ignore 1 rows;
 
-select sum(price) from order_items;
+-- ==============================
+-- 1. Top Selling Products
+-- ==============================
 
-select count(*) as total_orders from orders;
+SELECT product_name, SUM(sales) AS total_sales
+FROM orders
+GROUP BY product_name
+ORDER BY total_sales DESC;
 
-select count(distinct(customer_id)) from customers;
+-- ==============================
+-- 2. Customer Purchase Behavior
+-- ==============================
 
-SELECT o.order_id, SUM(oi.price) AS order_revenue
-FROM orders o
-JOIN order_items oi 
-ON o.order_id = oi.order_id
-GROUP BY o.order_id;
-
-SELECT o.order_id, SUM(oi.price) AS order_revenue
-FROM orders o
-JOIN order_items oi 
-ON o.order_id = oi.order_id
-GROUP BY o.order_id
-ORDER BY order_revenue DESC
-LIMIT 10;
-
-select p.category, sum(oi.price) as category_revenue
-from order_items oi join products p
-on oi.product_id = p.product_id
-group by p.category
-order by category_revenue desc;
-
-SELECT c.customer_id, SUM(oi.price) AS total_spent
-FROM customers c
-JOIN orders o ON c.customer_id = o.customer_id
-JOIN order_items oi ON o.order_id = oi.order_id
-GROUP BY c.customer_id
-ORDER BY total_spent DESC
-LIMIT 10;
-
-SELECT 
-DATE_FORMAT(o.order_purchase_time, '%Y-%m') AS month,
-SUM(oi.price) AS revenue
-FROM orders o
-JOIN order_items oi ON o.order_id = oi.order_id
-GROUP BY month
-ORDER BY month;
-
-SELECT customer_id, COUNT(order_id) AS order_count
+SELECT customer_id, COUNT(order_id) AS total_orders
 FROM orders
 GROUP BY customer_id
-HAVING COUNT(order_id) > 1;
+ORDER BY total_orders DESC;
 
-SELECT 
-    c.customer_id,
-    SUM(oi.price) AS total_spent,
-    RANK() OVER (ORDER BY SUM(oi.price) DESC) AS c_rank
-FROM customers c
-JOIN orders o ON c.customer_id = o.customer_id
-JOIN order_items oi ON o.order_id = oi.order_id
-GROUP BY c.customer_id;
+-- ==============================
+-- 3. Sales by Category
+-- ==============================
+
+SELECT category, SUM(sales) AS total_sales
+FROM orders
+GROUP BY category;
+
+-- ==============================
+-- 4. Monthly Revenue Trends
+-- ==============================
+
+SELECT MONTH(order_date) AS month, SUM(sales) AS revenue
+FROM orders
+GROUP BY month
+ORDER BY month;
